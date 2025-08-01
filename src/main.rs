@@ -17,7 +17,7 @@ fn encode(file: String) {
     let mut Message = String::from("0");
 
     for i in content.chars() {
-        let mut counter = i as u8;
+        let mut counter = i as u32;
         
         while counter > 0 {
             Message.push('7');
@@ -32,12 +32,12 @@ fn encode(file: String) {
 fn decode(file: String) {
     let content = fs::read_to_string(file).expect("Awawa");
     let mut Message = String::from("");
-    let mut counter: u8 = 0;
+    let mut counter: u32 = 0;
 
     for i in content.chars() {
         if i == '0' {
             if counter != 0 {
-                Message.push(counter as char);
+                Message.push(char::from_u32(counter).expect("UwU"));
                 counter = 0;
             }
         } else {
